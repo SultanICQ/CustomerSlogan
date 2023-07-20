@@ -1,10 +1,6 @@
 package com.mango.customer.controller;
 
-import com.mango.customer.domain.Customer;
-import com.mango.customer.dto.CustomerDto;
-import com.mango.customer.dto.UpdateCustomerDto;
 import com.mango.customer.service.SloganAddService;
-import com.mango.customer.service.UpdateCustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

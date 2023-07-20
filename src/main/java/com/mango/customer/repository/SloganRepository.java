@@ -1,8 +1,10 @@
 package com.mango.customer.repository;
 
-import com.mango.customer.domain.Customer;
-import com.mango.customer.dto.UpdateCustomerDto;
+import com.mango.customer.domain.Slogan;
+
+import java.util.List;
 
 public interface SloganRepository {
-	public Customer add(String userName, String slogan);
+	List<Slogan> get(String userName);
+	void add(String userName, Slogan slogan);
 }
