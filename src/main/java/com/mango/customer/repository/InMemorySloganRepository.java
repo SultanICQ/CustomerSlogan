@@ -3,6 +3,7 @@ package com.mango.customer.repository;
 import com.mango.customer.domain.Slogan;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,15 +18,16 @@ public class InMemorySloganRepository implements SloganRepository {
 
 	@Override
 	public List<Slogan> get(String userName) {
-		return this.data.get(userName);
+		List<Slogan> slogans = this.data.get(userName);
+		if (slogans == null) {
+			slogans = new ArrayList<>();
+		}
+		return slogans;
 	}
 
 	@Override
 	public void add(String userName, Slogan slogan) {
-		List<Slogan> slogans = this.data.get(userName);
-		if (slogans == null) {
-			slogans = Collections.emptyList();
-		}
+		List<Slogan> slogans = this.get(userName);
 		slogans.add(slogan);
 		this.data.put(userName, slogans);
 	}
