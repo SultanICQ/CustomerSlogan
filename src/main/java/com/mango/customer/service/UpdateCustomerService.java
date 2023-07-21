@@ -21,7 +21,7 @@ public class UpdateCustomerService {
 			throw new CustomerNotExistsException();
 		}
 
-		return customerRepository.update("username", updateCustomer);
+		return customerRepository.update(username, updateCustomer);
 	}
 
 }

@@ -2,7 +2,6 @@ package com.mango.customer.controller;
 
 import com.mango.customer.domain.Customer;
 import com.mango.customer.dto.CustomerDto;
-import com.mango.customer.repository.InMemoryCustomerRepository;
 import com.mango.customer.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
