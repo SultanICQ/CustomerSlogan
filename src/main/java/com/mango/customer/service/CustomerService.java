@@ -1,6 +1,7 @@
 package com.mango.customer.service;
 
 import com.mango.customer.domain.Customer;
+import com.mango.customer.exceptions.CustomerNotExistsException;
 import com.mango.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,10 @@ public class CustomerService {
 	}
 
 	public Customer find(String userName) {
-		return customerRepository.find(userName);
+		Customer customer = customerRepository.find(userName);
+		if (customer == null) {
+			throw new CustomerNotExistsException();
+		}
+		return customer;
 	}
 }
