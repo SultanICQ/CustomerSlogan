@@ -5,6 +5,7 @@ import com.mango.customer.dto.CustomerDto;
 import com.mango.customer.dto.UpdateCustomerDto;
 import com.mango.customer.service.UpdateCustomerService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +20,8 @@ public class UpdateCustomerController {
 	}
 
 	@PostMapping("/updateUser")
-	public ResponseEntity<CustomerDto> updateUser(@RequestBody UpdateCustomerDto updateCustomer) {
-		Customer customer = updateCustomerService.execute("username1", updateCustomer);
+	public ResponseEntity<CustomerDto> updateUser(Authentication authentication, @RequestBody UpdateCustomerDto updateCustomer) {
+		Customer customer = updateCustomerService.execute(authentication.getName(), updateCustomer);
 		return ResponseEntity.ok( CustomerDto.from(customer) );
 	}
 
