@@ -9,11 +9,12 @@ import java.util.List;
 
 @Service
 public class SloganAddService {
-	private final int MAX_SLOGANS = 3;
+	private int MAX_SLOGANS = 3;
 	private final SloganRepository repository;
 
-	public SloganAddService(SloganRepository repository) {
+	public SloganAddService(SloganRepository repository, int MAX_SLOGANS) {
 		this.repository = repository;
+		this.MAX_SLOGANS = MAX_SLOGANS;
 	}
 
 	public void execute(String userName, String value) {
