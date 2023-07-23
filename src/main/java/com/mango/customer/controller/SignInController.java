@@ -3,12 +3,15 @@ package com.mango.customer.controller;
 import com.mango.customer.domain.Customer;
 import com.mango.customer.dto.CustomerDto;
 import com.mango.customer.service.CustomerService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController()
+@RequestMapping(produces= MediaType.APPLICATION_JSON_VALUE)
 public class SignInController {
 
 	private CustomerService customerService;

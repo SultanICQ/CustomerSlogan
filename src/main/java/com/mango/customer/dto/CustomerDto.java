@@ -12,6 +12,30 @@ public class CustomerDto {
 	private String email;
 	private boolean termsAndConditions;
 
+	public String getName() {
+		return name;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public boolean isTermsAndConditions() {
+		return termsAndConditions;
+	}
+
 	public CustomerDto(String name, String lastName, String address, String city, String email, boolean termsAndConditions) {
 		this.name = name;
 		this.lastName = lastName;
