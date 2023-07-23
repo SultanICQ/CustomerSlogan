@@ -1,27 +1,17 @@
 package com.mango.customer.controller;
 
-import com.mango.customer.domain.Customer;
 import com.mango.customer.dto.CustomerDto;
-import com.mango.customer.service.CustomerService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class SignInControllerTest {
 	private static final String USERNAME = "username1";
 	private static final String PASSWORD = "user1Pass";
+	private static final String ENDPOINT = "/signin";
 
 	private final CustomerDto CUSTOMER_DTO = new CustomerDto(
 		"David",
@@ -36,7 +26,7 @@ class SignInControllerTest {
 		given()
 			.auth().basic(USERNAME, PASSWORD)
 		.when()
-			.get("/signin")
+			.get(ENDPOINT)
 		.then()
 			.statusCode(200);
 	}
@@ -45,7 +35,7 @@ class SignInControllerTest {
 		CustomerDto result = given()
 			.auth().basic(USERNAME, PASSWORD)
 		.when()
-			.get("/signin")
+			.get(ENDPOINT)
 		.then()
 			.extract()
 			.as(CustomerDto.class);
@@ -56,7 +46,7 @@ class SignInControllerTest {
 	void that_when_requesting_signin_data_without_user_is_unauthorized_status() {
 		given()
 		.when()
-			.get("/signin")
+			.get(ENDPOINT)
 		.then()
 			.statusCode(401);
 	}

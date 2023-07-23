@@ -1,6 +1,5 @@
 package com.mango.customer.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class Security {
 
-	private SecurityAuthEntryPoint authenticationEntryPoint;
+	private final SecurityAuthEntryPoint authenticationEntryPoint;
 
 	public Security(SecurityAuthEntryPoint authenticationEntryPoint) {
 		this.authenticationEntryPoint = authenticationEntryPoint;
@@ -34,9 +33,11 @@ public class Security {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.requestMatchers("/securityNone")
-			.permitAll()
+		http
+			.csrf().disable()
+			.authorizeRequests()
+//			.requestMatchers("/securityNone")
+//			.permitAll()
 			.anyRequest()
 			.authenticated()
 			.and()
