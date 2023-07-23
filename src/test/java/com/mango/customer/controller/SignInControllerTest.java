@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 
 import static io.restassured.RestAssured.when;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,7 +33,7 @@ class SignInControllerTest {
 	}
 
 	@Test
-	void signin_returns_customer_data() throws Exception {
+	void signin_returns_customer_data() {
 		given(service.find(any())).willReturn(CUSTOMER);
 		ResponseEntity<CustomerDto> response = sut.signin(AUTHENTICATION);
 
