@@ -16,8 +16,8 @@ public class SloganAddController {
 		this.sloganService = sloganService;
 	}
 
-	@PostMapping("/updateUser")
-	public ResponseEntity<String> updateUser(Authentication authentication, @RequestBody String slogan) {
+	@PostMapping("/sloganAdd")
+	public ResponseEntity<String> sloganAdd(Authentication authentication, @RequestBody String slogan) {
 		sloganService.execute(authentication.getName(), slogan);
 		return ResponseEntity.ok("");
 	}

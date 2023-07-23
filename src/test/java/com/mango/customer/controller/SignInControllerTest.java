@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
+import static io.restassured.RestAssured.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -39,4 +40,9 @@ class SignInControllerTest {
 
 		assertThat(response).isEqualTo(ResponseEntity.ok(CUSTOMER_DTO));
 	}
+	@Test
+	void that_when_requesting_signin_data_is_ok_status() {
+		when().get("/signin").then().statusCode(200);
+	}
+
 }
