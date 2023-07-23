@@ -1,6 +1,7 @@
 package com.mango.customer.repository;
 
 import com.mango.customer.domain.Slogan;
+import com.mango.customer.infra.InMemorySloganRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;

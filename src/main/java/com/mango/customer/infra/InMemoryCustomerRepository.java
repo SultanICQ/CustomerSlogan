@@ -1,6 +1,7 @@
-package com.mango.customer.repository;
+package com.mango.customer.infra;
 
 import com.mango.customer.domain.Customer;
+import com.mango.customer.domain.CustomerRepository;
 import com.mango.customer.dto.UpdateCustomerDto;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,7 @@ package com.mango.customer.service;
 
 import com.mango.customer.domain.Customer;
 import com.mango.customer.exceptions.CustomerNotExistsException;
-import com.mango.customer.repository.CustomerRepository;
+import com.mango.customer.domain.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 @Service

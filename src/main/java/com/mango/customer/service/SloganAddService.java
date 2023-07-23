@@ -2,7 +2,7 @@ package com.mango.customer.service;
 
 import com.mango.customer.domain.Slogan;
 import com.mango.customer.exceptions.MaxSlogansReachedForCustomer;
-import com.mango.customer.repository.SloganRepository;
+import com.mango.customer.domain.SloganRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

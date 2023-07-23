@@ -1,4 +1,4 @@
-package com.mango.customer.repository;
+package com.mango.customer.domain;
 
 import com.mango.customer.domain.Slogan;
 

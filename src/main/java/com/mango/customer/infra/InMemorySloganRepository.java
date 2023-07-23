@@ -1,10 +1,10 @@
-package com.mango.customer.repository;
+package com.mango.customer.infra;
 
 import com.mango.customer.domain.Slogan;
+import com.mango.customer.domain.SloganRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 

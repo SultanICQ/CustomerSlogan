@@ -2,6 +2,7 @@ package com.mango.customer.repository;
 
 import com.mango.customer.domain.Customer;
 import com.mango.customer.dto.UpdateCustomerDto;
+import com.mango.customer.infra.InMemoryCustomerRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
