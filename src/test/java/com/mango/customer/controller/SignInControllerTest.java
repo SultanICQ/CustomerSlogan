@@ -19,37 +19,46 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@ExtendWith(MockitoExtension.class)
 class SignInControllerTest {
-	private static final UsernamePasswordAuthenticationToken AUTHENTICATION = new UsernamePasswordAuthenticationToken("username1", "", null);
-	@Mock
-	private CustomerService service;
+	private static final String USERNAME = "username1";
+	private static final String PASSWORD = "user1Pass";
 
-	private SignInController sut;
+	private final CustomerDto CUSTOMER_DTO = new CustomerDto(
+		"David",
+		"Garcia",
+		"Mango Street 1",
+		"Palau de Plegamans",
+		"david.garcia@mango.com",
+		true);
 
-	private final Customer CUSTOMER = new Customer("username1", "Name", "LastName", "Address", "City", "Email", true);
-	private final CustomerDto CUSTOMER_DTO = new CustomerDto("Name", "LastName", "Address", "City", "Email", true);
-
-	@BeforeEach
-	void setUp() {
-		 sut = new SignInController(service);
-	}
-
-	@Test
-	void signin_returns_customer_data() {
-		given(service.find(any())).willReturn(CUSTOMER);
-		ResponseEntity<CustomerDto> response = sut.signin(AUTHENTICATION);
-
-		assertThat(response).isEqualTo(ResponseEntity.ok(CUSTOMER_DTO));
-	}
 	@Test
 	void that_when_requesting_signin_data_is_ok_status() {
 		given()
-			.auth().basic("username1", "user1Pass")
+			.auth().basic(USERNAME, PASSWORD)
 		.when()
 			.get("/signin")
 		.then()
 			.statusCode(200);
+	}
+	@Test
+	void that_when_requesting_signin_data_is_valid_customer_data() {
+		CustomerDto result = given()
+			.auth().basic(USERNAME, PASSWORD)
+		.when()
+			.get("/signin")
+		.then()
+			.extract()
+			.as(CustomerDto.class);
+
+		assertThat(result).isEqualTo(CUSTOMER_DTO);
+	}
+	@Test
+	void that_when_requesting_signin_data_without_user_is_unauthorized_status() {
+		given()
+		.when()
+			.get("/signin")
+		.then()
+			.statusCode(401);
 	}
 
 }
