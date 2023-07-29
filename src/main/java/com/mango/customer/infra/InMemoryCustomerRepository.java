@@ -6,6 +6,7 @@ import com.mango.customer.dto.UpdateCustomerDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 @Repository
 public class InMemoryCustomerRepository implements CustomerRepository {
@@ -25,27 +26,27 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 	}
 
 	@Override
-	public Customer find(String userName) {
-		return data.get(userName);
+	public Optional<Customer> find(String userName) {
+		return Optional.ofNullable(data.get(userName));
 	}
 
 	@Override
-	public Customer update(String username, UpdateCustomerDto updateCustomer) {
-		Customer oldCustomer = find(username);
-		if ( oldCustomer == null ) { return null; }
+	public Optional<Customer> update(String username, UpdateCustomerDto updateCustomer) {
+		Optional<Customer> oldCustomer = find(username);
+		if ( oldCustomer.isEmpty()) { return Optional.empty(); }
 
 		Customer newCustomer = new Customer(
-			oldCustomer.getUserName(),
+			oldCustomer.get().getUserName(),
 			updateCustomer.getName(),
 			updateCustomer.getLastName(),
 			updateCustomer.getAddress(),
 			updateCustomer.getCity(),
 			updateCustomer.getEmail(),
-			oldCustomer.isTermsAndConditions()
+			oldCustomer.get().isTermsAndConditions()
 		);
 
 		this.data.put(username, newCustomer);
 
-		return newCustomer;
+		return Optional.of(newCustomer);
 	}
 }

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 
@@ -16,7 +18,6 @@ import static org.mockito.BDDMockito.given;
 class CustomerServiceTest {
 
 	private static final String USERNAME = "username";
-	private static final Customer EMPTY_CUSTOMER = null;
 	private final Customer CUSTOMER = new Customer("username1", "Name", "LastName", "Address", "City", "Email", true);
 	@Mock
 	private CustomerRepository repository;
@@ -30,7 +31,7 @@ class CustomerServiceTest {
 
 	@Test
 	void that_asking_for_existing_user_returns_data() {
-		given(repository.find(USERNAME)).willReturn(CUSTOMER);
+		given(repository.find(USERNAME)).willReturn(Optional.of(CUSTOMER));
 
 		Customer result = sut.find(USERNAME);
 
@@ -39,7 +40,7 @@ class CustomerServiceTest {
 
 	@Test
 	void that_asking_for_non_existing_user_throws_exception() {
-		given(repository.find(USERNAME)).willReturn(EMPTY_CUSTOMER);
+		given(repository.find(USERNAME)).willReturn(Optional.empty());
 
 		assertThrows(CustomerNotExistsException.class, ()-> sut.find(USERNAME));
 	}

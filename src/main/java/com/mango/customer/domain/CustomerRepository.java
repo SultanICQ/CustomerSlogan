@@ -1,9 +1,10 @@
 package com.mango.customer.domain;
 
-import com.mango.customer.domain.Customer;
 import com.mango.customer.dto.UpdateCustomerDto;
 
+import java.util.Optional;
+
 public interface CustomerRepository {
-	public Customer find(String userName);
-	public Customer update(String username, UpdateCustomerDto updateCustomer);
+	public Optional<Customer> find(String userName);
+	public Optional<Customer> update(String username, UpdateCustomerDto updateCustomer);
 }

@@ -5,6 +5,8 @@ import com.mango.customer.dto.UpdateCustomerDto;
 import com.mango.customer.infra.InMemoryCustomerRepository;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryCustomerRepositoryTest {
@@ -19,7 +21,7 @@ class InMemoryCustomerRepositoryTest {
 		true);
 	private static final String USERNAME = "username1";
 	private static final String NOT_FOUND_USERNAME = "notexists";
-	private static final Short NO_CUSTOMER = null;
+	private static final Customer NO_CUSTOMER = null;
 	private static final UpdateCustomerDto UPDATE_CUSTOMER_DTO = new UpdateCustomerDto("NameModified",
 		"LastNameModified",
 		"AddressModified",
@@ -39,30 +41,32 @@ class InMemoryCustomerRepositoryTest {
 
 	@Test
 	void that_getting_valid_username_returns_customer() {
-		Customer result = sut.find(USERNAME);
+		Optional<Customer> result = sut.find(USERNAME);
 
-		assertEquals(CUSTOMER, result);
+		assertTrue(result.isPresent());
+		assertEquals(CUSTOMER, result.get());
 	}
 
 	@Test
 	void that_getting_non_existing_username_returns_null() {
-		Customer result = sut.find(NOT_FOUND_USERNAME);
+		Optional<Customer> result = sut.find(NOT_FOUND_USERNAME);
 
-		assertEquals(NO_CUSTOMER, result);
+		assertTrue(result.isEmpty());
 	}
 
 	@Test
 	void that_updating_valid_user_returns_updated_customer() {
-		Customer result = sut.update(USERNAME, UPDATE_CUSTOMER_DTO);
+		Optional<Customer> result = sut.update(USERNAME, UPDATE_CUSTOMER_DTO);
 
-		assertEquals(UPDATED_CUSTOMER, result);
+		assertTrue(result.isPresent());
+		assertEquals(UPDATED_CUSTOMER, result.get());
 	}
 
 	@Test
 	void that_updating_non_existing_user_returns_null() {
-		Customer result = sut.update(NOT_FOUND_USERNAME, UPDATE_CUSTOMER_DTO);
+		Optional<Customer> result = sut.update(NOT_FOUND_USERNAME, UPDATE_CUSTOMER_DTO);
 
-		assertEquals(NO_CUSTOMER, result);
+		assertTrue(result.isEmpty());
 	}
 
 

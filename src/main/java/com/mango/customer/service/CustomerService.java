@@ -5,6 +5,8 @@ import com.mango.customer.exceptions.CustomerNotExistsException;
 import com.mango.customer.domain.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerService {
 
@@ -15,10 +17,10 @@ public class CustomerService {
 	}
 
 	public Customer find(String userName) {
-		Customer customer = customerRepository.find(userName);
-		if (customer == null) {
+		Optional<Customer> customer = customerRepository.find(userName);
+		if (customer.isEmpty()) {
 			throw new CustomerNotExistsException();
 		}
-		return customer;
+		return customer.get();
 	}
 }
